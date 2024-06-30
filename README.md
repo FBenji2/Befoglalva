@@ -1,0 +1,1 @@
+Minden hónap végén a legfrissebb csv fájlok exportálásra kerülnek befoglalva térképről ([link](https://www.google.com/maps/d/viewer?mid=1hjOcx3VIAH9MZLk4EHSbGdCHQHe35R0), [link](https://offos.ch/befoglalva)) és feltöltésre kerülnek erre a repora. A commit neve tartalmazza, hogy melyik időpontról valók a csv fájlok.
