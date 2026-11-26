@@ -124,7 +124,7 @@ def find_farthest(coords, accuracy=FARTHEST_POINT_ACCURACY, samples=GREAT_CIRCLE
 
 
 STICKERS = "Offosch által lerakott matricák.csv"
-SAVED = "Far Far away.csv"
+SAVED = "Far far away.csv"
 
 NUMBER = r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?'
 POINT = re.compile(rf'POINT\s*\(\s*({NUMBER})\s+({NUMBER})\s*\)', re.I)
