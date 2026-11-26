@@ -32,7 +32,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install requests pillow
+        run: pip install requests pillow numpy
 
       - name: Run My Maps backup
         run: python backup_mymaps.py
