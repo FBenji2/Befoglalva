@@ -8,7 +8,7 @@ on:
 
 permissions:
   contents: write
-
+  issues: write
 concurrency:
   group: mymaps-backup
   cancel-in-progress: false
@@ -22,9 +22,7 @@ jobs:
 
     steps:
       - name: Determine backup date
-        run: |
-          echo "BACKUP_DATE=$(date -d yesterday '+%Y. %m. %d.')" >> "$GITHUB_ENV"
-
+        run: echo "BACKUP_DATE=$(date -d yesterday '+%Y. %m. %d.')" >> "$GITHUB_ENV"
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -51,4 +49,32 @@ jobs:
           else
             git commit -m "Backup hozzáadva: $BACKUP_DATE"
             git push
+          fi
+      - name: Compare farthest coordinates
+        run: python "voronoi coordinate.py" --compare
+      - name: Upload calculated coordinates
+        uses: actions/upload-artifact@v4
+        with:
+          name: calculated-farthest
+          path: calculated_farthest.csv
+      - name: Manage My Maps reminder
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          title='Update farthest coordinates in Google My Maps'
+          issue=$(gh issue list --state open --limit 1000 --json number,title --jq '.[] | select(.title == "Update farthest coordinates in Google My Maps") | .number' | head -n 1)
+          if [[ $(cat farthest_status.txt) == match ]]; then
+            if [[ -n "$issue" ]]; then
+              gh issue close "$issue" --comment 'The backed-up My Maps coordinates now match the calculated coordinates.'
+            fi
+          elif [[ -z "$issue" ]]; then
+            gh issue create --title "$title" --body-file farthest_issue.md
+          else
+            gh issue view "$issue" --json body --jq .body > previous_issue.md
+            if [[ "$(cat previous_issue.md)" != "$(cat farthest_issue.md)" ]]; then
+              gh issue edit "$issue" --body-file farthest_issue.md
+              gh issue comment "$issue" --body 'The calculated or saved coordinates have changed. See the updated issue description.'
+            fi
           fi

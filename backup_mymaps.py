@@ -33,6 +33,7 @@ KML_NS = {"kml": "http://www.opengis.net/kml/2.2"}
 CSV_URLS = [
     "https://www.google.com/maps/d/csv?mid=1hjOcx3VIAH9MZLk4EHSbGdCHQHe35R0&lid=LrJCwzgIg1s&cid=mp&cv=ZUs_2CdilBg.en_GB.",
     "https://www.google.com/maps/d/csv?mid=1hjOcx3VIAH9MZLk4EHSbGdCHQHe35R0&lid=HR65bL9sW5E&cid=mp&cv=ZUs_2CdilBg.en_GB.",
+    "https://www.google.com/maps/d/csv?mid=1hjOcx3VIAH9MZLk4EHSbGdCHQHe35R0&lid=w6rptsxLgFQ&cid=mp&cv=ZUs_2CdilBg.en_GB."
 ]
 
 
