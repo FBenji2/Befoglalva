@@ -123,7 +123,7 @@ def find_farthest(coords, accuracy=FARTHEST_POINT_ACCURACY, samples=GREAT_CIRCLE
     return np.degrees(np.column_stack((np.arctan2(z, np.hypot(x, y)), np.arctan2(y, x))))
 
 
-STICKERS = "stickers.csv"
+STICKERS = "Offosch által lerakott matricák.csv"
 SAVED = "Far Far away.csv"
 
 NUMBER = r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?'
